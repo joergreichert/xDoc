@@ -88,32 +88,32 @@ class LatexGenerator implements IConfigurableGenerator {
 	}
 	
 	def dispatch CharSequence generate(Document doc) '''
-		«preamble»
-		«FOR lang: doc.langDefs»
-			«lang.generate»
-		«ENDFOR»
-		«configureTodo»
+		Â«preambleÂ»
+		Â«FOR lang: doc.langDefsÂ»
+			Â«lang.generateÂ»
+		Â«ENDFORÂ»
+		Â«configureTodoÂ»
 		
 		\usepackage{hyperref}
 		
-		«doc.authorAndTitle»
+		Â«doc.authorAndTitleÂ»
 		
 		\begin{document}
 		\maketitle
 		\tableofcontents
-		«FOR chapter: doc.chapters»
+		Â«FOR chapter: doc.chaptersÂ»
 			
-			«chapter.generate»
-		«ENDFOR»
-		«FOR part: doc.parts»
+			Â«chapter.generateÂ»
+		Â«ENDFORÂ»
+		Â«FOR part: doc.partsÂ»
 			
-			«part.generate»
-		«ENDFOR»
-		«genListOfLinks»
+			Â«part.generateÂ»
+		Â«ENDFORÂ»
+		Â«genListOfLinksÂ»
 		
-		«IF !(config.get(Config::release) as Boolean)»
+		Â«IF !(config.get(Config::release) as Boolean)Â»
 			\listoftodos
-		«ENDIF»
+		Â«ENDIFÂ»
 		\end{document}
 	'''
 
@@ -121,9 +121,9 @@ class LatexGenerator implements IConfigurableGenerator {
 		if(!links.empty)
 			'''
 				\chapter{List of External Links}
-				«FOR link: links»
-					\noindent\url{«link»}
-				«ENDFOR»
+				Â«FOR link: linksÂ»
+					\noindent\url{Â«linkÂ»}
+				Â«ENDFORÂ»
 			'''
 	}
 
@@ -161,7 +161,7 @@ class LatexGenerator implements IConfigurableGenerator {
 		\definecolor{cocolor}{HTML}{3F7F5F}
 
 		\lstset{tabsize=4, basicstyle=\sffamily\small, keywordstyle=\bfseries\color{kwcolor}, commentstyle=\color{cocolor},
-		stringstyle=\color{strcolor}, columns=[r]fullflexible, escapechar={ß}, frame=single, %framexleftmargin=-5pt, framexrightmargin=-5pt, 
+		stringstyle=\color{strcolor}, columns=[r]fullflexible, escapechar={ÃŸ}, frame=single, %framexleftmargin=-5pt, framexrightmargin=-5pt, 
 		xleftmargin=5pt, xrightmargin=5pt, rulecolor=\color{lightgray}, showstringspaces=false, backgroundcolor=\color{listingsbg!70}}
 		
 		\newlength{\XdocItemIndent}
@@ -172,15 +172,15 @@ class LatexGenerator implements IConfigurableGenerator {
 	// TODO: migrate to generate
 	def configureTodo() {
 		'''
-		«IF (config.get(Config::release) as Boolean)»
+		Â«IF (config.get(Config::release) as Boolean)Â»
 			\renewcommand{\todo}[1]{}
-		«ENDIF»
+		Â«ENDIFÂ»
 		'''
 	}
 
 	def dispatch CharSequence generate(LangDef lang) '''
-		\lstdefinelanguage{«lang.name»}
-		  {morekeywords={«lang.keywords.join(", ")»},
+		\lstdefinelanguage{Â«lang.nameÂ»}
+		  {morekeywords={Â«lang.keywords.join(", ")Â»},
 		    sensitive=true,
 		    morecomment=[l]{//},
 		    morecomment=[s]{/*}{*/},
@@ -191,13 +191,13 @@ class LatexGenerator implements IConfigurableGenerator {
 
 	def authorAndTitle(Document doc) {
 		'''
-		«IF doc.authors != null && !doc.authors.contents.empty»
-			\author{«FOR o : doc.authors.contents»«o.genText»«ENDFOR»}
-		«ENDIF»
+		Â«IF doc.authors != null && !doc.authors.contents.emptyÂ»
+			\author{Â«FOR o : doc.authors.contentsÂ»Â«o.genTextÂ»Â«ENDFORÂ»}
+		Â«ENDIFÂ»
 		
-		«IF doc.title != null»
-			\title{«FOR o : doc.title?.contents»«o.genText»«ENDFOR»}
-		«ENDIF»
+		Â«IF doc.title != nullÂ»
+			\title{Â«FOR o : doc.title?.contentsÂ»Â«o.genTextÂ»Â«ENDFORÂ»}
+		Â«ENDIFÂ»
 		'''
 	}
 
@@ -210,21 +210,21 @@ class LatexGenerator implements IConfigurableGenerator {
 	 */
 	def dispatch CharSequence generate(AbstractSection sec){
 		'''
-		«switch (sec){
+		Â«switch (sec){
 			Part :
-				'''\part{«sec.title.genNonParContent»}'''
+				'''\part{Â«sec.title.genNonParContentÂ»}'''
 			Chapter :			
-				'''\chapter{«sec.title.genNonParContent»}'''
+				'''\chapter{Â«sec.title.genNonParContentÂ»}'''
 			Section : 
-				'''\section{«sec.title.genNonParContent»}'''
+				'''\section{Â«sec.title.genNonParContentÂ»}'''
 			Section2:
-				'''\subsection{«sec.title.genNonParContent»}'''
+				'''\subsection{Â«sec.title.genNonParContentÂ»}'''
 			Section3:
-				'''\subsubsection{«sec.title.genNonParContent»}'''	
+				'''\subsubsection{Â«sec.title.genNonParContentÂ»}'''	
 			Section4:
-				'''\paragraph{«sec.title.genNonParContent»}'''	
-		}»
-		«switch (sec) {
+				'''\paragraph{Â«sec.title.genNonParContentÂ»}'''	
+		}Â»
+		Â«switch (sec) {
 			Part:
 				sec.genLabel
 			Chapter:
@@ -233,75 +233,75 @@ class LatexGenerator implements IConfigurableGenerator {
 				sec.genLabel
 			default:
 				sec.title.genLabel				
-		}»
-		«sec.genContent»
+		}Â»
+		Â«sec.genContentÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Chapter chap){
 		'''
-		«FOR c : chap.contents»«c.genContent»«ENDFOR»
-		«FOR sub : chap.subSections»«sub.generate»«ENDFOR»
+		Â«FOR c : chap.contentsÂ»Â«c.genContentÂ»Â«ENDFORÂ»
+		Â«FOR sub : chap.subSectionsÂ»Â«sub.generateÂ»Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Part part){
 		'''
 		
-		«FOR c : part.contents»
-			«c.genContent»
-		«ENDFOR»
-		«FOR sub : part.chapters»«sub.generate»«ENDFOR»
+		Â«FOR c : part.contentsÂ»
+			Â«c.genContentÂ»
+		Â«ENDFORÂ»
+		Â«FOR sub : part.chaptersÂ»Â«sub.generateÂ»Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Section sec){
 		'''
-		«FOR c : sec.contents»
-			«c.genContent»
-		«ENDFOR»
-		«FOR sub : sec.subSections»
-			«sub.generate»
-		«ENDFOR»
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genContentÂ»
+		Â«ENDFORÂ»
+		Â«FOR sub : sec.subSectionsÂ»
+			Â«sub.generateÂ»
+		Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Section2 sec){
 		'''
-		«sec.genLabel»
-		«FOR c : sec.contents»
-			«c.genContent»
-		«ENDFOR»
-		«FOR sub : sec.subSections»
-			«sub.generate»
-		«ENDFOR»
+		Â«sec.genLabelÂ»
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genContentÂ»
+		Â«ENDFORÂ»
+		Â«FOR sub : sec.subSectionsÂ»
+			Â«sub.generateÂ»
+		Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Section3 sec){
 		'''
-		«sec.genLabel»
-		«FOR c : sec.contents»
-			«c.genContent»
-		«ENDFOR»
-		«FOR sub : sec.subSections»
-			«sub.generate»
-		«ENDFOR»
+		Â«sec.genLabelÂ»
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genContentÂ»
+		Â«ENDFORÂ»
+		Â«FOR sub : sec.subSectionsÂ»
+			Â«sub.generateÂ»
+		Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(Section4 sec){
 		'''
-		«sec.genLabel»
-		«FOR c : sec.contents»
-			«c.genContent»
-		«ENDFOR»
+		Â«sec.genLabelÂ»
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genContentÂ»
+		Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence genContent(TextOrMarkup tom){
 		'''
-			«FOR e : tom.contents»«e.genText»«ENDFOR»
+			Â«FOR e : tom.contentsÂ»Â«e.genTextÂ»Â«ENDFORÂ»
 			
 		'''
 	}
@@ -310,7 +310,7 @@ class LatexGenerator implements IConfigurableGenerator {
 	 * genNonParContent
 	 */
 	def genNonParContent(TextOrMarkup tom){
-		'''«FOR e : tom.contents»«e.genText»«ENDFOR»'''
+		'''Â«FOR e : tom.contentsÂ»Â«e.genTextÂ»Â«ENDFORÂ»'''
 	}
 
 	/**
@@ -318,66 +318,66 @@ class LatexGenerator implements IConfigurableGenerator {
 	 * Generates a label
 	 */
 	def dispatch genLabel(Part part) '''
-		«IF part.name != null»
-			\label{«part.name?.toString»}
-		«ENDIF»
+		Â«IF part.name != nullÂ»
+			\label{Â«part.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 	
 
 	def dispatch genLabel(PartRef part) '''
-		«IF part.part.name != null»
-			\label{«part.part.name?.toString»}
-		«ENDIF»
+		Â«IF part.part.name != nullÂ»
+			\label{Â«part.part.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(ChapterRef cRef) '''
-		«IF cRef.chapter.name != null»
-			\label{«cRef.chapter.name?.toString»}
-		«ENDIF»
+		Â«IF cRef.chapter.name != nullÂ»
+			\label{Â«cRef.chapter.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 	
 
 	def dispatch genLabel(Chapter chap) '''
-		«IF chap.name != null»
-			\label{«chap.name?.toString»}
-		«ENDIF»
+		Â«IF chap.name != nullÂ»
+			\label{Â«chap.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 
 	def dispatch genLabel(Section sec) '''
-		«IF sec.name != null»
-			\label{«sec.name?.toString»}
-		«ENDIF»
+		Â«IF sec.name != nullÂ»
+			\label{Â«sec.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(SectionRef sRef) '''
-		«IF sRef.section.name != null»
-			\label{«sRef.section.name?.toString»}
-		«ENDIF»
+		Â«IF sRef.section.name != nullÂ»
+			\label{Â«sRef.section.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(Section2 sec) '''
-		«IF sec.name != null»
-			\label{«sec.name?.toString»}
-		«ENDIF»
+		Â«IF sec.name != nullÂ»
+			\label{Â«sec.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(Section2Ref sRef) '''
-		«IF sRef.section2.name != null»
-			\label{«sRef.section2.name?.toString»}
-		«ENDIF»
+		Â«IF sRef.section2.name != nullÂ»
+			\label{Â«sRef.section2.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(Section3 sec) '''
-		«IF sec.name != null»
-			\label{«sec.name?.toString»}
-		«ENDIF»
+		Â«IF sec.name != nullÂ»
+			\label{Â«sec.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(Section4 sec) '''
-		«IF sec.name != null»
-			\label{«sec.name?.toString»}
-		«ENDIF»
+		Â«IF sec.name != nullÂ»
+			\label{Â«sec.name?.toStringÂ»}
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch genLabel(TextOrMarkup tom){
@@ -385,15 +385,15 @@ class LatexGenerator implements IConfigurableGenerator {
 	}
 
 	 def genURL(String str){
-	 	'''\noindent\url{«str»}'''
+	 	'''\noindent\url{Â«strÂ»}'''
 	 }
 
 	def dispatch CharSequence genText(Table tab) '''
 		
 		\setlength{\XdocTEffectiveWidth}{\textwidth}
-		\addtolength{\XdocTEffectiveWidth}{-«tab.rows.head.data.size*2».0\tabcolsep}
-		\noindent\begin{tabular}{«tab.rows.head.data.genColumns»}
-		«tab.rows.map([e | e.genText]).join("\\\\\n")»
+		\addtolength{\XdocTEffectiveWidth}{-Â«tab.rows.head.data.size*2Â».0\tabcolsep}
+		\noindent\begin{tabular}{Â«tab.rows.head.data.genColumnsÂ»}
+		Â«tab.rows.map([e | e.genText]).join("\\\\\n")Â»
 		\end{tabular}
 	'''
 
@@ -413,7 +413,7 @@ class LatexGenerator implements IConfigurableGenerator {
 		\setlength{\XdocItemIndent}{\textwidth}
 		\begin{enumerate}
 		\addtolength{\XdocItemIndent}{-2.5em}
-		«ol.items.map([e | e.genText]).join»
+		Â«ol.items.map([e | e.genText]).joinÂ»
 		\end{enumerate}
 		\addtolength{\XdocItemIndent}{2.5em}
 	'''
@@ -423,7 +423,7 @@ class LatexGenerator implements IConfigurableGenerator {
 		\setlength{\XdocItemIndent}{\textwidth}
 		\begin{itemize}
 		\addtolength{\XdocItemIndent}{-2.5em}
-		«ul.items.map([e | e.genText]).join»
+		Â«ul.items.map([e | e.genText]).joinÂ»
 		\end{itemize}
 		\addtolength{\XdocItemIndent}{2.5em}
 		'''
@@ -431,27 +431,27 @@ class LatexGenerator implements IConfigurableGenerator {
 
 	def dispatch CharSequence genText(Item item){
 		'''
-		\item \begin{minipage}[t]{\XdocItemIndent}«IF item.contents.head.block»\vspace*{-\baselineskip}«ENDIF»
-		«item.contents.map([e|e.genContent]).join»
+		\item \begin{minipage}[t]{\XdocItemIndent}Â«IF item.contents.head.blockÂ»\vspace*{-\baselineskip}Â«ENDIFÂ»
+		Â«item.contents.map([e|e.genContent]).joinÂ»
 		\end{minipage}
 		'''	
 	}
 
 	def dispatch CharSequence genText(Emphasize em){
-		'''\textit{«em.contents.map([e|e.genNonParContent]).join»}'''
+		'''\textit{Â«em.contents.map([e|e.genNonParContent]).joinÂ»}'''
 	}
 
 	def dispatch CharSequence genText(Ref ref){
-		'''«IF ref.contents.isEmpty»\autoref{«ref.ref.name»}«ELSE»\hyperref[«ref.ref.name»]{«ref.contents.map([e|e.genNonParContent]).join»~(§\ref*{«ref.ref.name»})}«ENDIF»'''
+		'''Â«IF ref.contents.isEmptyÂ»\autoref{Â«ref.ref.nameÂ»}Â«ELSEÂ»\hyperref[Â«ref.ref.nameÂ»]{Â«ref.contents.map([e|e.genNonParContent]).joinÂ»~(Â§\ref*{Â«ref.ref.nameÂ»})}Â«ENDIFÂ»'''
 	}
 
 	def dispatch CharSequence genText(Anchor anchor) {
-		'''\phantomsection\label{«anchor.name»}'''
+		'''\phantomsection\label{Â«anchor.nameÂ»}'''
 	}
 
 	def dispatch CharSequence genText(Link link){
 		links.add(link.url)
-		'''\href{«link.url»}{«link.text»}'''
+		'''\href{Â«link.urlÂ»}{Â«link.textÂ»}'''
 	}
 
 	def dispatch CharSequence genText(CodeBlock block) {
@@ -459,17 +459,17 @@ class LatexGenerator implements IConfigurableGenerator {
 	}
 
 	def dispatch CharSequence genText(CodeRef codeRef){
-		'''\protect\lstinline°«codeRef.element.qualifiedName.unescapeXdocChars.escapeLatexChars»°'''
+		'''\protect\lstinlineÂ°Â«codeRef.element.qualifiedName.unescapeXdocChars.escapeLatexCharsÂ»Â°'''
 	}
 
 	def dispatch CharSequence genText(ImageRef imgRef){
 		'''
 		\begin{figure}[!ht]
 		\centering
-		\includegraphics{«copy(imgRef)»}
-		«IF imgRef.caption != null && imgRef.caption.matches("^\\s*$")»
-		\caption{«imgRef.caption»}
-		«ENDIF»
+		\includegraphics{Â«copy(imgRef)Â»}
+		Â«IF imgRef.caption != null && imgRef.caption.matches("^\\s*$")Â»
+		\caption{Â«imgRef.captionÂ»}
+		Â«ENDIFÂ»
 		\end{figure}
 		'''
 		
@@ -507,7 +507,7 @@ class LatexGenerator implements IConfigurableGenerator {
 
 	def dispatch CharSequence genText(Todo todo){
 		if(!config.get(Config::release) as Boolean)
-			'''\todo[inline]{«todo.text.unescapeXdocChars.escapeLatexChars»}'''
+			'''\todo[inline]{Â«todo.text.unescapeXdocChars.escapeLatexCharsÂ»}'''
 		else
 			''''''
 	}
@@ -531,15 +531,15 @@ class LatexGenerator implements IConfigurableGenerator {
 	 def specialGenCode(CodeBlock block) {
 		if(block.inline)
 			if(block.containerTypeOf(XdocPackage.Literals::TABLE)) {
-	 			'''\protect\lstinline«block.language?.langSpec»°«block.contents.map[genCode].join»°'''
+	 			'''\protect\lstinlineÂ«block.language?.langSpecÂ»Â°Â«block.contents.map[genCode].joinÂ»Â°'''
 	 		} else {
-	 			'''\protect\lstinline«block.language?.langSpec»{«block.contents.map[genCode].join»}'''
+	 			'''\protect\lstinlineÂ«block.language?.langSpecÂ»{Â«block.contents.map[genCode].joinÂ»}'''
 	 		}
 	 	else
 			'''
 				
-				\begin{lstlisting}«block.language?.langSpec»
-				«block.removeIndent.contents.map([e|e.genCode]).join»
+				\begin{lstlisting}Â«block.language?.langSpecÂ»
+				Â«block.removeIndent.contents.map([e|e.genCode]).joinÂ»
 				\end{lstlisting}
 			'''
 	}
@@ -556,7 +556,7 @@ class LatexGenerator implements IConfigurableGenerator {
 
 	// see Bug 345934
 	def langSpec(LangDef lang) {
-		'''«IF lang != null»[language=«lang.name»]«ENDIF»'''
+		'''Â«IF lang != nullÂ»[language=Â«lang.nameÂ»]Â«ENDIFÂ»'''
 	}
 
 	def dispatch genCode(Code code){
@@ -564,7 +564,7 @@ class LatexGenerator implements IConfigurableGenerator {
 	}
 
 	def dispatch genCode(MarkupInCode mic){
-		'''«lstEscapeToTex()»«mic.genText»«lstEscapeToTex()»'''
+		'''Â«lstEscapeToTex()Â»Â«mic.genTextÂ»Â«lstEscapeToTex()Â»'''
 	}
 
 	def dispatch genCode(Object o){
@@ -573,7 +573,7 @@ class LatexGenerator implements IConfigurableGenerator {
 
 	def genColumns(List<TableData> tabData){
 		val colFract = new XFloat(1)/new XFloat(tabData.size)
-		'''«IF !tabData.empty»|«FOR td: tabData»p{«colFract»\XdocTEffectiveWidth}|«ENDFOR»«ENDIF»'''
+		'''Â«IF !tabData.emptyÂ»|Â«FOR td: tabDataÂ»p{Â«colFractÂ»\XdocTEffectiveWidth}|Â«ENDFORÂ»Â«ENDIFÂ»'''
 	}
 
 	def String calcStyle(ImageRef ref) {

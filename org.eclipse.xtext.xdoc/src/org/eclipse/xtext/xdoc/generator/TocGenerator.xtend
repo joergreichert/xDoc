@@ -14,29 +14,29 @@ class TocGenerator {
 
 	def generateToc(Document doc, EclipseHelpUriUtil uriUtil) '''
 		<?xml version="1.0" encoding="ISO-8859-1" ?>
-		<toc topic="contents/«doc.fullURL»" label="«doc.title.genPlainText»" >
-			«FOR c: doc.chapters»
-				«c.genTocEntry(uriUtil)»
-			«ENDFOR»			
-			«FOR p: doc.parts»
-				«p.genTocEntry(uriUtil)»
-			«ENDFOR»
+		<toc topic="contents/Â«doc.fullURLÂ»" label="Â«doc.title.genPlainTextÂ»" >
+			Â«FOR c: doc.chaptersÂ»
+				Â«c.genTocEntry(uriUtil)Â»
+			Â«ENDFORÂ»			
+			Â«FOR p: doc.partsÂ»
+				Â«p.genTocEntry(uriUtil)Â»
+			Â«ENDFORÂ»
 		</toc>
 	'''
 
 	def CharSequence genTocEntry(Chapter c, EclipseHelpUriUtil uriUtil) '''
-		<topic href="contents/«uriUtil.getTargetURI(c)»" label="«c.title.genPlainText»" >
-			«FOR ss: c.subSections»
-				«ss.genTocEntry(uriUtil)»
-			«ENDFOR»
+		<topic href="contents/Â«uriUtil.getTargetURI(c)Â»" label="Â«c.title.genPlainTextÂ»" >
+			Â«FOR ss: c.subSectionsÂ»
+				Â«ss.genTocEntry(uriUtil)Â»
+			Â«ENDFORÂ»
 		</topic>
 	'''
 
 	def CharSequence genTocEntry(AbstractSection section, EclipseHelpUriUtil uriUtil) '''
-		<topic href="contents/«uriUtil.getTargetURI(section)»" label="«section.title.genPlainText»" >
-			«FOR ss:section.sections»
-				«ss.genTocEntry(uriUtil)»
-			«ENDFOR»
+		<topic href="contents/Â«uriUtil.getTargetURI(section)Â»" label="Â«section.title.genPlainTextÂ»" >
+			Â«FOR ss:section.sectionsÂ»
+				Â«ss.genTocEntry(uriUtil)Â»
+			Â«ENDFORÂ»
 		</topic>
 	'''
 }

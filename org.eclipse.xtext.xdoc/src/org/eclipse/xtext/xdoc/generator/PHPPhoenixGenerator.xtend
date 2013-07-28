@@ -18,12 +18,12 @@ class PHPPhoenixGenerator {
 		'''
 			<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
 				include("include.php");
-				$pageTitle 		= "«^as.title.genPlainText»";
+				$pageTitle 		= "Â«^as.title.genPlainTextÂ»";
 				
-				$html = file_get_contents('«^as.resourceURL»');
+				$html = file_get_contents('Â«^as.resourceURLÂ»');
 			
 				$Nav->setLinkList(array());
-				«genScriptsAndStyles(^as)»
+				Â«genScriptsAndStyles(^as)Â»
 				# Generate the web page
 				$App->generatePage("Nova", $Menu, NULL, $pageAuthor, $pageKeywords, $pageTitle, $html);
 			?>
@@ -36,8 +36,8 @@ class PHPPhoenixGenerator {
 		'''
 			<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
 				include("include.php");
-				«doc.genScriptsAndStyles»
-				$pageTitle 		= "«doc.title.genPlainText»";
+				Â«doc.genScriptsAndStylesÂ»
+				$pageTitle 		= "Â«doc.title.genPlainTextÂ»";
 				
 				$html .=  file_get_contents('_index.html');
 			
@@ -63,20 +63,20 @@ class PHPPhoenixGenerator {
 				# these are optional
 				# $Nav->setLinkList(array());
 
-«««				$pageKeywords	= "xtext, dsl, modeling, domain specific language, textual";
-				«IF doc.authors != null»$pageAuthor		= "«doc.authors.genPlainText»";«ENDIF»
-				«IF doc.title != null»$pageTitle 		= "«doc.title.genPlainText»";«ENDIF»
+Â«Â«Â«				$pageKeywords	= "xtext, dsl, modeling, domain specific language, textual";
+				Â«IF doc.authors != nullÂ»$pageAuthor		= "Â«doc.authors.genPlainTextÂ»";Â«ENDIFÂ»
+				Â«IF doc.title != nullÂ»$pageTitle 		= "Â«doc.title.genPlainTextÂ»";Â«ENDIFÂ»
 
-«««				$Menu->setMenuItemList(array());
-«««				$Menu->addMenuItem("Home", "/Xtext", "_self");
-«««				$Menu->addMenuItem("Download", "/Xtext/download", "_self");
-«««				$Menu->addMenuItem("Documentation", "/Xtext/documentation", "_self");
-«««				$Menu->addMenuItem("Support", "/Xtext/support", "_self");
-«««				$Menu->addMenuItem("Community", "/Xtext/community", "_self");
-«««				$Menu->addMenuItem("Developers", "/Xtext/developers", "_self");
-«««
-«««				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style.css"/>' . "\n\t");
-«««				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style2.css"/>' . "\n\t");
+Â«Â«Â«				$Menu->setMenuItemList(array());
+Â«Â«Â«				$Menu->addMenuItem("Home", "/Xtext", "_self");
+Â«Â«Â«				$Menu->addMenuItem("Download", "/Xtext/download", "_self");
+Â«Â«Â«				$Menu->addMenuItem("Documentation", "/Xtext/documentation", "_self");
+Â«Â«Â«				$Menu->addMenuItem("Support", "/Xtext/support", "_self");
+Â«Â«Â«				$Menu->addMenuItem("Community", "/Xtext/community", "_self");
+Â«Â«Â«				$Menu->addMenuItem("Developers", "/Xtext/developers", "_self");
+Â«Â«Â«
+Â«Â«Â«				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style.css"/>' . "\n\t");
+Â«Â«Â«				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="/Xtext/style2.css"/>' . "\n\t");
 				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="code.css"/>' . "\n\t");
 				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="book.css"/>' . "\n\t");
 				$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="novaAddon.css"/>' . "\n\t");
@@ -94,7 +94,7 @@ class PHPPhoenixGenerator {
 		$App->AddExtraHtmlHeader('
 		<script type="text/javascript">
 		function init() {
-			var docName = "«^as.fullURL»";
+			var docName = "Â«^as.fullURLÂ»";
 		    initTocMenu(docName);
 			highlightCurrentSection(docName);
 		}
@@ -104,11 +104,11 @@ class PHPPhoenixGenerator {
 
 			var chapters = menu.children;
 			addHideSubsectionFunction(chapters);
-			«IF ^as instanceof Section»
+			Â«IF ^as instanceof SectionÂ»
 			var subToc = document.getElementById(ActiveSubTocElementId).parentNode;
-			«ELSE»
+			Â«ELSEÂ»
 			var subToc = document.getElementById(\'subToc_\' + ActiveSubTocElementId);
-			«ENDIF»
+			Â«ENDIFÂ»
 			if(subToc) {
 				subToc.style.display = "block";
 				subToc.previousElementSibling.children[0].style.display = "none"

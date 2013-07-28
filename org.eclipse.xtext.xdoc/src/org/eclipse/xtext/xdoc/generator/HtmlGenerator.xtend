@@ -78,7 +78,7 @@ class HtmlGenerator implements IGenerator {
 		doc.generatePHP(fsa)
 		fsa.generateFile("_index.html", Outlets::WEB_SITE,
 		'''
-			«doc.body(leftNav)»
+			Â«doc.body(leftNav)Â»
 		'''
 		)
 		if(!doc.chapters.empty)
@@ -94,13 +94,13 @@ class HtmlGenerator implements IGenerator {
 
 	def CharSequence genPrevButton(AbstractSection section) '''
 		<span class="prev_button">
-			<a href="«section.fullURL»" >Previous</a>
+			<a href="Â«section.fullURLÂ»" >Previous</a>
 		</span>
 	'''
 
 	def CharSequence genNextButton(AbstractSection section) '''
 		<span class="next_button">
-			<a href="«section.fullURL»" >Next</a>
+			<a href="Â«section.fullURLÂ»" >Next</a>
 		</span>
 	'''
 
@@ -109,10 +109,10 @@ class HtmlGenerator implements IGenerator {
 		fsa.generateFile(URLDecoder::decode(section.resourceURL), Outlets::WEB_SITE, '''
 			<br style="clear:both;height:1em;">
 				<div id="leftcol">
-					«leftNav»
+					Â«leftNavÂ»
 				</div>
 				<div id="midcolumn">
-					«section.generate(fsa, leftNav, leftNavUnfoldSubTocId)»
+					Â«section.generate(fsa, leftNav, leftNavUnfoldSubTocId)Â»
 					<div id="disqus_thread"></div>
 					<script type="text/javascript" src="documentationRoot.js"></script>
 					<script type="text/javascript">
@@ -120,8 +120,8 @@ class HtmlGenerator implements IGenerator {
 					    var disqus_shortname = 'xtext'; // required: replace example with your forum shortname
 					
 					    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-					    var disqus_identifier = '«section.localId»';
-					    var disqus_url = documentationRoot+'«section.resourceURL.replace('.html','.php')»';
+					    var disqus_identifier = 'Â«section.localIdÂ»';
+					    var disqus_url = documentationRoot+'Â«section.resourceURL.replace('.html','.php')Â»';
 					
 					    /* * * DON'T EDIT BELOW THIS LINE * * */
 					    (function() {
@@ -139,76 +139,76 @@ class HtmlGenerator implements IGenerator {
 	def dispatch CharSequence generate(ChapterRef chap, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) {
 		chap.chapter.generateFile(fsa, leftNav, chap.fullURL)
 		
-		'''<a href="«chap.fullURL»"><«chap.tag»>«chap.genPlainText»</«chap.tag»></a>'''
+		'''<a href="Â«chap.fullURLÂ»"><Â«chap.tagÂ»>Â«chap.genPlainTextÂ»</Â«chap.tagÂ»></a>'''
 	}
 	
 	def dispatch CharSequence generate(SectionRef section, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) {
 		section.section.generateFile(fsa, leftNav, section.fullURL)
-		'''<a href="«section.fullURL»"><«section.tag»>«section.genPlainText»</«section.tag»></a>'''
+		'''<a href="Â«section.fullURLÂ»"><Â«section.tagÂ»>Â«section.genPlainTextÂ»</Â«section.tagÂ»></a>'''
 	}
 	
 	def dispatch CharSequence generate(Section2Ref section2, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) {
 		section2.section2.generateFile(fsa, leftNav, section2.fullURL)
-		'''<a href="«section2.fullURL»"><«section2.tag»>«section2.genPlainText»</«section2.tag»></a>'''
+		'''<a href="Â«section2.fullURLÂ»"><Â«section2.tagÂ»>Â«section2.genPlainTextÂ»</Â«section2.tagÂ»></a>'''
 	}
 	
 	def dispatch CharSequence generate(Chapter chap, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) '''
-		«chap.localId.anchor»
-		<«chap.tag»>«chap.title.genNonParText»</«chap.tag»>
-				«chap.toc»
+		Â«chap.localId.anchorÂ»
+		<Â«chap.tagÂ»>Â«chap.title.genNonParTextÂ»</Â«chap.tagÂ»>
+				Â«chap.tocÂ»
 				
-		«FOR c : chap.contents »
-			«c.genText»
-		«ENDFOR»
-		«FOR sec: chap.sections»
-			«sec.generate(fsa, leftNav, leftNavUnfoldSubTocId)»
-		«ENDFOR»
+		Â«FOR c : chap.contents Â»
+			Â«c.genTextÂ»
+		Â«ENDFORÂ»
+		Â«FOR sec: chap.sectionsÂ»
+			Â«sec.generate(fsa, leftNav, leftNavUnfoldSubTocId)Â»
+		Â«ENDFORÂ»
 	'''
 	
 	def dispatch CharSequence generate(Section sec, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) '''
-		«sec.localId.anchor»
+		Â«sec.localId.anchorÂ»
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<«sec.tag»>«sec.title.genNonParText»</«sec.tag»>
-			«sec.toc»
-			«FOR c : sec.contents»
-				«c.genText»
-			«ENDFOR»
-			«FOR sec2: sec.sections»
-				«sec2.generate(fsa, leftNav, leftNavUnfoldSubTocId)»
-			«ENDFOR»
+			<Â«sec.tagÂ»>Â«sec.title.genNonParTextÂ»</Â«sec.tagÂ»>
+			Â«sec.tocÂ»
+			Â«FOR c : sec.contentsÂ»
+				Â«c.genTextÂ»
+			Â«ENDFORÂ»
+			Â«FOR sec2: sec.sectionsÂ»
+				Â«sec2.generate(fsa, leftNav, leftNavUnfoldSubTocId)Â»
+			Â«ENDFORÂ»
 	'''
 
 	def dispatch CharSequence generate(Section2 sec, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) '''
-		«sec.localId.anchor»
-		<«sec.tag»>«sec.title.genNonParText»</«sec.tag»>
-		«FOR c : sec.contents»
-			«c.genText»
-		«ENDFOR»
-		«FOR sec3: sec.sections»
-			«sec3.generate(fsa, leftNav, leftNavUnfoldSubTocId)»
-		«ENDFOR»
+		Â«sec.localId.anchorÂ»
+		<Â«sec.tagÂ»>Â«sec.title.genNonParTextÂ»</Â«sec.tagÂ»>
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genTextÂ»
+		Â«ENDFORÂ»
+		Â«FOR sec3: sec.sectionsÂ»
+			Â«sec3.generate(fsa, leftNav, leftNavUnfoldSubTocId)Â»
+		Â«ENDFORÂ»
 	'''
 	
 	def dispatch CharSequence generate(Section3 sec, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) '''
-		«sec.localId.anchor»
-		<«sec.tag»>«sec.title.genNonParText»</«sec.tag»>
-		«FOR c : sec.contents»
-			«c.genText»
-		«ENDFOR»
-		«FOR c : sec.sections»
-			«c.generate(fsa, leftNav, leftNavUnfoldSubTocId)»
-		«ENDFOR»
+		Â«sec.localId.anchorÂ»
+		<Â«sec.tagÂ»>Â«sec.title.genNonParTextÂ»</Â«sec.tagÂ»>
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genTextÂ»
+		Â«ENDFORÂ»
+		Â«FOR c : sec.sectionsÂ»
+			Â«c.generate(fsa, leftNav, leftNavUnfoldSubTocId)Â»
+		Â«ENDFORÂ»
 	'''
 
 	def dispatch CharSequence generate(Section4 sec, IFileSystemAccess fsa, CharSequence leftNav, CharSequence leftNavUnfoldSubTocId) '''
-		«sec.localId.anchor»
-		<«sec.tag»>«sec.title.genText»</«sec.tag»>
-		«FOR c : sec.contents»
-			«c.genText»
-		«ENDFOR»
+		Â«sec.localId.anchorÂ»
+		<Â«sec.tagÂ»>Â«sec.title.genTextÂ»</Â«sec.tagÂ»>
+		Â«FOR c : sec.contentsÂ»
+			Â«c.genTextÂ»
+		Â«ENDFORÂ»
 	'''
 	
 	def String tag(AbstractSection section) {
@@ -225,8 +225,8 @@ class HtmlGenerator implements IGenerator {
 	def CharSequence body(Document doc, CharSequence leftNav) '''
 		<br style="clear:both;height:1em;">
 		<div id="leftcol">
-		«/*generateLogo*/""»
-		«leftNav»
+		Â«/*generateLogo*/""Â»
+		Â«leftNavÂ»
 		</div>
 		<br style="clear:both;height:1em;">
 	'''
@@ -235,84 +235,84 @@ class HtmlGenerator implements IGenerator {
 		if(!section.sections.empty)
 		'''
 			<div class="toc">
-			  «section.subToc»
+			  Â«section.subTocÂ»
 			</div>
 		'''
 	}
 
 	def CharSequence subToc(AbstractSection section) '''
 		<ul>
-		  «FOR ss: section.sections»
-		    «ss.tocEntry»
-		  «ENDFOR»
+		  Â«FOR ss: section.sectionsÂ»
+		    Â«ss.tocEntryÂ»
+		  Â«ENDFORÂ»
 		</ul>
 	'''
 	def dispatch CharSequence tocEntry(Chapter chapter) 
-	'''<li><a href="«chapter.fullPHPURL»" >«chapter.title.genNonParText»</a>«IF !chapter.sections.empty»
-	«chapter.subToc»«ENDIF»</li>
+	'''<li><a href="Â«chapter.fullPHPURLÂ»" >Â«chapter.title.genNonParTextÂ»</a>Â«IF !chapter.sections.emptyÂ»
+	Â«chapter.subTocÂ»Â«ENDIFÂ»</li>
 	'''
 
 	def dispatch CharSequence tocEntry(AbstractSection section) '''
-		<li><a href="«section.fullPHPURL»" >«section.title.genNonParText »</a></li>
+		<li><a href="Â«section.fullPHPURLÂ»" >Â«section.title.genNonParText Â»</a></li>
 	'''
 		
 	
 	def CharSequence leftNavToc(Document doc) {
 		'''
-			«generateLogo»
+			Â«generateLogoÂ»
 			<ul id="leftnav">
-			  «FOR c: doc.sections»
-		    	«c.leftNavTocEntry»
-		  	  «ENDFOR»
+			  Â«FOR c: doc.sectionsÂ»
+		    	Â«c.leftNavTocEntryÂ»
+		  	  Â«ENDFORÂ»
 			</ul>
 		'''
 	}
 
 	def dispatch CharSequence leftNavTocEntry(Part part) '''
 		<li class="partentry" >
-		«part.title.genPlainText»
+		Â«part.title.genPlainTextÂ»
 		</li>
-		«FOR ss: part.sections»
-		    «ss.leftNavTocEntry»
-		«ENDFOR»
+		Â«FOR ss: part.sectionsÂ»
+		    Â«ss.leftNavTocEntryÂ»
+		Â«ENDFORÂ»
 	'''
 
 	def CharSequence leftNavSubToc(Chapter chap) '''
-		<ul style="display: none;" id="«chap.elementIdForSubToc»">
-		«FOR ss: chap.sections»
-		    «ss.leftNavTocEntry»
-		«ENDFOR»
+		<ul style="display: none;" id="Â«chap.elementIdForSubTocÂ»">
+		Â«FOR ss: chap.sectionsÂ»
+		    Â«ss.leftNavTocEntryÂ»
+		Â«ENDFORÂ»
 		</ul>
 	'''
 
 	def dispatch CharSequence leftNavTocEntry(Chapter chapter) '''
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; «IF chapter.sections.empty»display:none«ENDIF»"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="«chapter.fullPHPURL»">«chapter.title.genNonParText.toString.escapeHtml»</a></div>
-		«IF !chapter.sections.empty»«chapter.leftNavSubToc»«ENDIF»</li>
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; Â«IF chapter.sections.emptyÂ»display:noneÂ«ENDIFÂ»"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="Â«chapter.fullPHPURLÂ»">Â«chapter.title.genNonParText.toString.escapeHtmlÂ»</a></div>
+		Â«IF !chapter.sections.emptyÂ»Â«chapter.leftNavSubTocÂ»Â«ENDIFÂ»</li>
 	'''
 
 	def dispatch CharSequence leftNavTocEntry(AbstractSection section) '''
-		<li id="«section.fullURL»" ><a href="«section.fullPHPURL»" >«section.title.genNonParText.toString.escapeHtml»</a></li>
+		<li id="Â«section.fullURLÂ»" ><a href="Â«section.fullPHPURLÂ»" >Â«section.title.genNonParText.toString.escapeHtmlÂ»</a></li>
 	'''
 
 	def CharSequence genAuthors(Document doc) {
 		if(doc.authors != null)
 			'''
 				<div class="authors">
-				«doc.authors.genText»
+				Â«doc.authors.genTextÂ»
 				</div>
 			'''
 	}
 
 	def CharSequence genNonParText(TextOrMarkup tom) {
-		'''«FOR c: tom.contents»«c.genText»«ENDFOR»'''
+		'''Â«FOR c: tom.contentsÂ»Â«c.genTextÂ»Â«ENDFORÂ»'''
 	}
 
 	def dispatch CharSequence genText(TextOrMarkup tom) {
 		'''
 		<p>
-		«FOR c: tom.contents»«c.genText»«ENDFOR»
+		Â«FOR c: tom.contentsÂ»Â«c.genTextÂ»Â«ENDFORÂ»
 		</p>
 		'''
 	}
@@ -320,16 +320,16 @@ class HtmlGenerator implements IGenerator {
 	def dispatch CharSequence genText(CodeBlock cb) {
 		if(!cb.contents.empty) {
 			if(cb.inlineCode)
-				'''<span class="inlinecode">«(cb.contents.head as Code).generateCode(cb.language)»</span>'''
+				'''<span class="inlinecode">Â«(cb.contents.head as Code).generateCode(cb.language)Â»</span>'''
 			else {
 				val block = StringUtils::removeIndent(cb)
 				'''	
 					<div class="literallayout">
 						<div class="incode">
 							<p class="code">
-								«FOR code:block.contents»
-									«code.generateCode(cb.language)»
-								«ENDFOR»
+								Â«FOR code:block.contentsÂ»
+									Â«code.generateCode(cb.language)Â»
+								Â«ENDFORÂ»
 							</p>
 						</div>
 					</div>
@@ -349,13 +349,13 @@ class HtmlGenerator implements IGenerator {
 						cRef.element.dottedSimpleName
 					}
 		var ret = if(jDocLink != null)
-			'''<a class="jdoc" href="«cRef.element.genJavaDocLink»" title="«fqn»">«
-			prefix»«text»</abbr></a>'''
+			'''<a class="jdoc" href="Â«cRef.element.genJavaDocLinkÂ»" title="Â«fqnÂ»">Â«
+			prefixÂ»Â«textÂ»</abbr></a>'''
 		else
-			'''<abbr title="«fqn
-				»" >«prefix»«text»</abbr>'''
+			'''<abbr title="Â«fqn
+				Â»" >Â«prefixÂ»Â«textÂ»</abbr>'''
 		if(gitLink != null) {
-			'''«ret» <a class="srcLink" href="«gitLink»" title="View Source Code" >(src)</a>'''
+			'''Â«retÂ» <a class="srcLink" href="Â«gitLinkÂ»" title="View Source Code" >(src)</a>'''
 		} else 
 			ret
 	}
@@ -368,11 +368,11 @@ class HtmlGenerator implements IGenerator {
 	}
 
 	def dispatch CharSequence genText(Emphasize em)
-		'''<em>«em.contents.generate»</em>'''
+		'''<em>Â«em.contents.generateÂ»</em>'''
 
 	def dispatch CharSequence genText(Todo todo) '''
 			<div class="todo" >
-			«todo.text»
+			Â«todo.textÂ»
 			</div>
 		'''
 
@@ -380,20 +380,20 @@ class HtmlGenerator implements IGenerator {
 		if (tomList.size == 1) {
 			tomList.head.genNonParText
 		} else '''
-			«FOR tom: tomList»
-				«tom.genText»
-			«ENDFOR»
+			Â«FOR tom: tomListÂ»
+				Â«tom.genTextÂ»
+			Â«ENDFORÂ»
 		'''
 	}
 
 	def dispatch CharSequence generateCode(Code code, LangDef lang)
-		'''«code.contents.unescapeXdocChars.formatCode(lang)»'''
+		'''Â«code.contents.unescapeXdocChars.formatCode(lang)Â»'''
 
 	def dispatch CharSequence generateCode(Code code, Void lang)
-		'''«code.contents.unescapeXdocChars.formatCode(null)»'''
+		'''Â«code.contents.unescapeXdocChars.formatCode(null)Â»'''
 
 	def dispatch CharSequence generateCode(MarkupInCode mic, LangDef lang)
-		'''«mic.genText»'''
+		'''Â«mic.genTextÂ»'''
 
 	def dispatch CharSequence genText(TextPart tp) {
 		tp.text.unescapeXdocChars.escapeHtml
@@ -405,81 +405,81 @@ class HtmlGenerator implements IGenerator {
 
 	def dispatch CharSequence genText(Ref ref) {
 		val title = if(ref.ref instanceof AbstractSection) {
-			'''title="Go to &quot;«(ref.ref as AbstractSection).title.genPlainText»&quot;"'''
+			'''title="Go to &quot;Â«(ref.ref as AbstractSection).title.genPlainTextÂ»&quot;"'''
 		}
-		'''«IF ref.contents.isEmpty »<a href="«ref.ref.fullPHPURL»" «title» >section «ref.ref.name»</a>«ELSE
-		»<a href="«ref.ref.fullPHPURL»" «title»>«FOR tom:ref.contents
-		»«tom.genNonParText»«ENDFOR»</a>«
-		ENDIF»'''
+		'''Â«IF ref.contents.isEmpty Â»<a href="Â«ref.ref.fullPHPURLÂ»" Â«titleÂ» >section Â«ref.ref.nameÂ»</a>Â«ELSE
+		Â»<a href="Â«ref.ref.fullPHPURLÂ»" Â«titleÂ»>Â«FOR tom:ref.contents
+		Â»Â«tom.genNonParTextÂ»Â«ENDFORÂ»</a>Â«
+		ENDIFÂ»'''
 	}
 
 	
 	def dispatch CharSequence genText(Link link) 
-		'''<a href="«link.url»" >«IF link.text != null»«link.text»«ELSE»«link.url»«ENDIF»</a>'''
+		'''<a href="Â«link.urlÂ»" >Â«IF link.text != nullÂ»Â«link.textÂ»Â«ELSEÂ»Â«link.urlÂ»Â«ENDIFÂ»</a>'''
 
 	def dispatch CharSequence genText(OrderedList ol)
 		'''
 		<ol>
-		  «FOR i:ol.items»
-		    «i.genText»
-		  «ENDFOR»
+		  Â«FOR i:ol.itemsÂ»
+		    Â«i.genTextÂ»
+		  Â«ENDFORÂ»
 		</ol>
 		'''
 
 	def dispatch CharSequence genText(UnorderedList ol)
 		'''
 		<ul>
-		  «FOR i:ol.items»
-		    «i.genText»
-		  «ENDFOR»
+		  Â«FOR i:ol.itemsÂ»
+		    Â«i.genTextÂ»
+		  Â«ENDFORÂ»
 		</ul>
 		'''
 
 
 	def dispatch CharSequence genText(Item item) '''
-		<li>«item.contents.generate»</li>
+		<li>Â«item.contents.generateÂ»</li>
 	'''
 
 	def dispatch CharSequence genText(Table table) '''
 		<table>
-		  «FOR tr: table.rows»
-		    «genRow(tr)»
-		  «ENDFOR»
+		  Â«FOR tr: table.rowsÂ»
+		    Â«genRow(tr)Â»
+		  Â«ENDFORÂ»
 		</table>
 	'''
 
 	def CharSequence genRow(TableRow tr) '''
 		<tr>
-		  «FOR td: tr.data»
-		    «genData(td)»
-		  «ENDFOR»
+		  Â«FOR td: tr.dataÂ»
+		    Â«genData(td)Â»
+		  Â«ENDFORÂ»
 		</tr>
 	'''
 
 	def CharSequence genData(TableData td)
-	'''<td>«td.contents.generate»</td>'''
+	'''<td>Â«td.contents.generateÂ»</td>'''
 
 	def dispatch CharSequence genText(ImageRef img) {
 		copy(img.path.unescapeXdocChars, img.eResource)
 		'''
 			<div class="image" >
-			«IF img.name != null»
-				<a>«img.name»</a>
-			«ENDIF»
-			<a class="gallery" rel="prettyPhoto[all]" title="«img.caption.unescapeXdocChars.escapeHtml»" href="«img.path.unescapeXdocChars().replaceAll("\\.\\./","")»">
-				<img src="«img.path.unescapeXdocChars().replaceAll("\\.\\./","")»" 
-					«IF !img.clazz.nullOrEmpty»
-						class="«img.clazz.unescapeXdocChars»" 
-					«ELSE»
+			Â«IF img.name != nullÂ»
+				<a>Â«img.nameÂ»</a>
+			Â«ENDIFÂ»
+			<a class="gallery" rel="prettyPhoto[all]" title="Â«img.caption.unescapeXdocChars.escapeHtmlÂ»" href="Â«img.path.unescapeXdocChars().replaceAll("\\.\\./","")Â»">
+				<img src="Â«img.path.unescapeXdocChars().replaceAll("\\.\\./","")Â»" 
+					Â«IF !img.clazz.nullOrEmptyÂ»
+						class="Â«img.clazz.unescapeXdocCharsÂ»" 
+					Â«ELSEÂ»
 						width="600px"
-					«ENDIF»
-					«IF !img.style.nullOrEmpty»
-						 style="«img.style.unescapeXdocChars»" 
-					«ENDIF»
+					Â«ENDIFÂ»
+					Â«IF !img.style.nullOrEmptyÂ»
+						 style="Â«img.style.unescapeXdocCharsÂ»" 
+					Â«ENDIFÂ»
 				/>
 			</a>
 			<div class="caption">
-				«img.caption.unescapeXdocChars.escapeHtml»
+				Â«img.caption.unescapeXdocChars.escapeHtmlÂ»
 			</div>
 			</div>
 		'''
@@ -511,10 +511,10 @@ class HtmlGenerator implements IGenerator {
 	}
 
 	def CharSequence anchor(String name)
-		'''<a name="«name»" ></a>'''
+		'''<a name="Â«nameÂ»" ></a>'''
 
 	def CharSequence elementIdForSubToc(Chapter chap)
-		'''subToc_«chap.fullURL»'''
+		'''subToc_Â«chap.fullURLÂ»'''
 
 	def CharSequence generateLogo() '''
 		<div class="nav-logo">

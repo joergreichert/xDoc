@@ -66,7 +66,7 @@ class GitExtensions {
 					val languageID = name.split('\\.').get(2)
 					val pluginSuffix = name.split('\\.').get(3)
 					val subdir = if(pluginSuffix == 'examples') 'examples' else 'languages'
-					'''«SEVENLANGUAGES_BASEDIR»«subdir»/org.xtext.«languageID»«IF SEVEN_LANGUAGE_PLUGIN_SUFFIXES.contains(pluginSuffix)».«pluginSuffix»«ENDIF»/src/''' 
+					'''Â«SEVENLANGUAGES_BASEDIRÂ»Â«subdirÂ»/org.xtext.Â«languageIDÂ»Â«IF SEVEN_LANGUAGE_PLUGIN_SUFFIXES.contains(pluginSuffix)Â».Â«pluginSuffixÂ»Â«ENDIFÂ»/src/''' 
 				}
 				default:
 					""

@@ -47,7 +47,7 @@ class Utils {
 		if(s != null)
 			s.replace("&", "&amp;").replace("'", "&apos;")
 				.replace("<", "&lt;").replace(">", "&gt;")
-				.replace("«", "&laquo;").replace("»", "&raquo;")
+				.replace("Â«", "&laquo;").replace("Â»", "&raquo;")
 		else
 			""
 	}

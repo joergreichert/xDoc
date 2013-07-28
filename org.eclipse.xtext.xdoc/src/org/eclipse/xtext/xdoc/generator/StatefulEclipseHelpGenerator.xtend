@@ -126,29 +126,29 @@ class StatefulEclipseHelpGenerator {
 		<html>
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-		<title>«document.title.genPlainText»</title>
+		<title>Â«document.title.genPlainTextÂ»</title>
 		
 		<link href="book.css" rel="stylesheet" type="text/css">
 		<link href="code.css" rel="stylesheet" type="text/css">
-		<link rel="home" href="«document.fullURL»" title="">
+		<link rel="home" href="Â«document.fullURLÂ»" title="">
 		</head>
 		<body>
-		<h1>«document.title.genPlainText»</h1>
-		«FOR content:document.contents»
-			«content.generatePar»
-		«ENDFOR»
-		«FOR ss: document.sections BEFORE "<ol>" AFTER "</ol>"»
-			«ss.generateEntryInRoot»
-		«ENDFOR»
+		<h1>Â«document.title.genPlainTextÂ»</h1>
+		Â«FOR content:document.contentsÂ»
+			Â«content.generateParÂ»
+		Â«ENDFORÂ»
+		Â«FOR ss: document.sections BEFORE "<ol>" AFTER "</ol>"Â»
+			Â«ss.generateEntryInRootÂ»
+		Â«ENDFORÂ»
 		</body>
 		</html>
 	'''
 	
 	def CharSequence generateEntryInRoot(AbstractSection section) '''
-		<li><a href="«uriUtil.getTargetURI(section)»">«section.title.genPlainText»</a>
-			«FOR ss: section.sections BEFORE "<ol>" AFTER "</ol>"»
-				«ss.generateEntryInRoot»
-			«ENDFOR»
+		<li><a href="Â«uriUtil.getTargetURI(section)Â»">Â«section.title.genPlainTextÂ»</a>
+			Â«FOR ss: section.sections BEFORE "<ol>" AFTER "</ol>"Â»
+				Â«ss.generateEntryInRootÂ»
+			Â«ENDFORÂ»
 		</li>
 	'''
 
@@ -167,18 +167,18 @@ class StatefulEclipseHelpGenerator {
 		<html>
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-		<title>«part.title.genPlainText»</title>
+		<title>Â«part.title.genPlainTextÂ»</title>
 		
 		<link href="book.css" rel="stylesheet" type="text/css">
 		<link href="code.css" rel="stylesheet" type="text/css">
-		<link rel="home" href="«homeFileName»" title="">
+		<link rel="home" href="Â«homeFileNameÂ»" title="">
 		</head>
 		<body>
-		<a name="«part.localId»"></a>
-		<«part.headtag»>«part.title.genPlainText»</«part.headtag»>
-		«FOR ss: part.sections BEFORE "<ol>" AFTER "</ol>"»
-			«ss.generateEntryInRoot»
-		«ENDFOR»
+		<a name="Â«part.localIdÂ»"></a>
+		<Â«part.headtagÂ»>Â«part.title.genPlainTextÂ»</Â«part.headtagÂ»>
+		Â«FOR ss: part.sections BEFORE "<ol>" AFTER "</ol>"Â»
+			Â«ss.generateEntryInRootÂ»
+		Â«ENDFORÂ»
 		</body>
 		</html>
 	'''
@@ -187,21 +187,21 @@ class StatefulEclipseHelpGenerator {
 		<html>
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-		<title>«chapter.title.genPlainText»</title>
+		<title>Â«chapter.title.genPlainTextÂ»</title>
 		
 		<link href="book.css" rel="stylesheet" type="text/css">
 		<link href="code.css" rel="stylesheet" type="text/css">
-		<link rel="home" href="«homeFileName»" title="">
+		<link rel="home" href="Â«homeFileNameÂ»" title="">
 		</head>
 		<body>
-		<a name="«chapter.localId»"></a>
-		<«chapter.headtag»>«chapter.title.genPlainText»</«chapter.headtag»>
-		«FOR content:chapter.contents»
-			«content.generatePar»
-		«ENDFOR»
-		«FOR ss: chapter.sections»
-			«ss.generate»
-		«ENDFOR»
+		<a name="Â«chapter.localIdÂ»"></a>
+		<Â«chapter.headtagÂ»>Â«chapter.title.genPlainTextÂ»</Â«chapter.headtagÂ»>
+		Â«FOR content:chapter.contentsÂ»
+			Â«content.generateParÂ»
+		Â«ENDFORÂ»
+		Â«FOR ss: chapter.sectionsÂ»
+			Â«ss.generateÂ»
+		Â«ENDFORÂ»
 		</body>
 		</html>
 	'''
@@ -219,75 +219,75 @@ class StatefulEclipseHelpGenerator {
 	}
 
 	def dispatch CharSequence generate(AbstractSection section) '''
-		<a name="«section.localId»"></a>
-		<«section.headtag»>«section.title.genPlainText»</«section.headtag»>
-		«FOR c : section.contents »
-			«c.generatePar»
-		«ENDFOR»
-		«FOR ss : section.sections»
-			«ss.generate»
-		«ENDFOR»
+		<a name="Â«section.localIdÂ»"></a>
+		<Â«section.headtagÂ»>Â«section.title.genPlainTextÂ»</Â«section.headtagÂ»>
+		Â«FOR c : section.contents Â»
+			Â«c.generateParÂ»
+		Â«ENDFORÂ»
+		Â«FOR ss : section.sectionsÂ»
+			Â«ss.generateÂ»
+		Â«ENDFORÂ»
 	'''
 
 	def dispatch CharSequence generate(Section4 aS) '''
-		<a name="«aS.localId»"></a>
-		<h5>«aS.title.genNonParContent»</h5>
-		«FOR tom : aS.contents»
-			«tom.generatePar»
-		«ENDFOR»
+		<a name="Â«aS.localIdÂ»"></a>
+		<h5>Â«aS.title.genNonParContentÂ»</h5>
+		Â«FOR tom : aS.contentsÂ»
+			Â«tom.generateParÂ»
+		Â«ENDFORÂ»
 	'''
 
 	def CharSequence generatePar(TextOrMarkup tom) '''
 		<p>
-		«FOR c : tom.contents»«c.generate»«ENDFOR»
+		Â«FOR c : tom.contentsÂ»Â«c.generateÂ»Â«ENDFORÂ»
 		</p>
 	'''
 
 	def dispatch CharSequence generate(Todo todo) '''
 		<div class="todo" >
-		«todo.text»
+		Â«todo.textÂ»
 		</div>
 	'''
 
 	def dispatch CharSequence generate(Ref ref) {
 		val title = if(ref.ref instanceof AbstractSection) {
-				'''title="Go to &quot;«(ref.ref as AbstractSection).title.genPlainText»&quot;"'''
+				'''title="Go to &quot;Â«(ref.ref as AbstractSection).title.genPlainTextÂ»&quot;"'''
 			}
-		'''«IF ref.contents.isEmpty »<a href="«uriUtil.getTargetURI(ref)»" «title» >section «ref.ref.name»</a>«ELSE
-		»<a href="«uriUtil.getTargetURI(ref)»" «title»>«FOR tom:ref.contents
-		»«tom.genNonParContent»«ENDFOR»</a>«
-		ENDIF»'''	
+		'''Â«IF ref.contents.isEmpty Â»<a href="Â«uriUtil.getTargetURI(ref)Â»" Â«titleÂ» >section Â«ref.ref.nameÂ»</a>Â«ELSE
+		Â»<a href="Â«uriUtil.getTargetURI(ref)Â»" Â«titleÂ»>Â«FOR tom:ref.contents
+		Â»Â«tom.genNonParContentÂ»Â«ENDFORÂ»</a>Â«
+		ENDIFÂ»'''	
 	}
 	
 	def dispatch CharSequence generate(TextOrMarkup tom) 
-		'''«FOR obj:tom.contents»«obj.generate»«ENDFOR»'''
+		'''Â«FOR obj:tom.contentsÂ»Â«obj.generateÂ»Â«ENDFORÂ»'''
 
 	def dispatch CharSequence generate(UnorderedList ul) '''
 		<ul>
-			«FOR i:ul.items»
-			  	«i.generate»
-			«ENDFOR»
+			Â«FOR i:ul.itemsÂ»
+			  	Â«i.generateÂ»
+			Â«ENDFORÂ»
 		</ul>
 	'''
 
 	def dispatch CharSequence generate(OrderedList ul) '''
 		<ol>
-			«FOR i:ul.items»
-				«i.generate»
-			«ENDFOR»
+			Â«FOR i:ul.itemsÂ»
+				Â«i.generateÂ»
+			Â«ENDFORÂ»
 		</ol>
 	'''
 
 	def dispatch CharSequence generate(Item i) '''
 		<li>
-			«FOR tom:i.contents»
-				«tom.generate»
-			«ENDFOR»
+			Â«FOR tom:i.contentsÂ»
+				Â«tom.generateÂ»
+			Â«ENDFORÂ»
 		</li>
 	'''
 
 	def dispatch CharSequence generate(Anchor a) 
-		'''<a name="anchor-«a.name»"></a>'''
+		'''<a name="anchor-Â«a.nameÂ»"></a>'''
 		
 	def noop() {
 	}
@@ -311,20 +311,20 @@ class StatefulEclipseHelpGenerator {
 		copy(escapedPath, img.eResource) //imageAbsoluteURI, imageTargetURI, img.eResource.resourceSet.URIConverter)
 		'''
 			<div class="image" >
-			«IF img.name != null»
-				«img.name.genLabel»
-			«ENDIF»
-			<img src="«imageChapterRelativeURI.toString.unescapeXdocChars()»" «IF img.clazz != null»class="«img.clazz.unescapeXdocChars»" «ENDIF»
-			«IF img.style != null && !(img.style.length==0)» style="«img.style.unescapeXdocChars»" «ENDIF»/>
+			Â«IF img.name != nullÂ»
+				Â«img.name.genLabelÂ»
+			Â«ENDIFÂ»
+			<img src="Â«imageChapterRelativeURI.toString.unescapeXdocChars()Â»" Â«IF img.clazz != nullÂ»class="Â«img.clazz.unescapeXdocCharsÂ»" Â«ENDIFÂ»
+			Â«IF img.style != null && !(img.style.length==0)Â» style="Â«img.style.unescapeXdocCharsÂ»" Â«ENDIFÂ»/>
 			<div class="caption">
-			«img.caption.unescapeXdocChars.escapeHTMLChars»
+			Â«img.caption.unescapeXdocChars.escapeHTMLCharsÂ»
 			</div>
 			</div>
 		'''
 	} 
 
 	def genLabel(String name) '''
-		«IF this != null »<a name="«name»"></a>«ENDIF»
+		Â«IF this != null Â»<a name="Â«nameÂ»"></a>Â«ENDIFÂ»
 	'''
 
 	def dispatch CharSequence generate(TextPart tp) {
@@ -333,33 +333,33 @@ class StatefulEclipseHelpGenerator {
 
 	def dispatch CharSequence generate(Table table) '''
 		<table>
-		«FOR tr:table.rows»
-			«tr.generate»
-		«ENDFOR»
+		Â«FOR tr:table.rowsÂ»
+			Â«tr.generateÂ»
+		Â«ENDFORÂ»
 		</table>
 	'''
 
 	def dispatch CharSequence generate(TableRow tr) '''
 		<tr>
-		«FOR td:tr.data»
-			«td.generate»
-		«ENDFOR»
+		Â«FOR td:tr.dataÂ»
+			Â«td.generateÂ»
+		Â«ENDFORÂ»
 		</tr>
 	'''
 
 	def dispatch CharSequence generate(TableData td) '''
 		<td>
-		«FOR c:td.contents»
-			«c.generate»
-		«ENDFOR»
+		Â«FOR c:td.contentsÂ»
+			Â«c.generateÂ»
+		Â«ENDFORÂ»
 		</td>
 	'''
 
 	def dispatch CharSequence generate(Emphasize em) 
-		'''<em>«FOR c:em.contents»«c.generate»«ENDFOR»</em>'''
+		'''<em>Â«FOR c:em.contentsÂ»Â«c.generateÂ»Â«ENDFORÂ»</em>'''
 
 	def dispatch CharSequence generate(Link link) 
-		'''<a href="«link.url»">«link.text.unescapeXdocChars.escapeHTMLChars»</a>'''
+		'''<a href="Â«link.urlÂ»">Â«link.text.unescapeXdocChars.escapeHTMLCharsÂ»</a>'''
 	
 	def dispatch CharSequence generate(CodeRef cRef) {
 		val prefix = if(cRef.element instanceof JvmAnnotationType && cRef.altText == null) "@"
@@ -372,13 +372,13 @@ class StatefulEclipseHelpGenerator {
 						cRef.element.dottedSimpleName
 					}
 		var ret = if(jDocLink != null)
-			'''<a class="jdoc" href="«cRef.element.genJavaDocLink»" title="View JavaDoc"><abbr title="«fqn
-				»" >«prefix»«text»</abbr></a>'''
+			'''<a class="jdoc" href="Â«cRef.element.genJavaDocLinkÂ»" title="View JavaDoc"><abbr title="Â«fqn
+				Â»" >Â«prefixÂ»Â«textÂ»</abbr></a>'''
 		else
-			'''<abbr title="«fqn
-				»" >«prefix»«text»</abbr>'''
+			'''<abbr title="Â«fqn
+				Â»" >Â«prefixÂ»Â«textÂ»</abbr>'''
 		if(gitLink != null) {
-			'''«ret» <a class="srcLink" href="«gitLink»" title="View Source Code" >(src)</a>'''
+			'''Â«retÂ» <a class="srcLink" href="Â«gitLinkÂ»" title="View Source Code" >(src)</a>'''
 		} else 
 			ret
 	}
@@ -392,7 +392,7 @@ class StatefulEclipseHelpGenerator {
 
 	def dispatch CharSequence generate(CodeBlock cb) {
 		if(cb.isInlineCode) {
-			'''<span class="inlinecode">«(cb.contents.head as Code).generateCode.formatCode(cb.language)»</span>'''
+			'''<span class="inlinecode">Â«(cb.contents.head as Code).generateCode.formatCode(cb.language)Â»</span>'''
 		} else {
 			val indentToRemove = cb.calcIndent
 			val list = 
@@ -411,11 +411,11 @@ class StatefulEclipseHelpGenerator {
 				<div class="literallayout">
 				<div class="incode">
 				<p class="code">
-				«first.formatCode(cb.language)»
-				«FOR code: list»
-					«code.generateCode.trimLines(indentToRemove).formatCode(cb.language)»
-				«ENDFOR»
-				«last.formatCode(cb.language)»
+				Â«first.formatCode(cb.language)Â»
+				Â«FOR code: listÂ»
+					Â«code.generateCode.trimLines(indentToRemove).formatCode(cb.language)Â»
+				Â«ENDFORÂ»
+				Â«last.formatCode(cb.language)Â»
 				</p>
 				</div>
 				</div>
@@ -428,13 +428,13 @@ class StatefulEclipseHelpGenerator {
 	}
 
 	def dispatch generateCode(Code code) 
-		'''«code.contents.unescapeXdocChars»'''
+		'''Â«code.contents.unescapeXdocCharsÂ»'''
 	
 	
 	def dispatch generateCode(MarkupInCode code) 
-		'''«code.generate»'''
+		'''Â«code.generateÂ»'''
 
 	def genNonParContent(TextOrMarkup tom) 
-		'''«FOR obj:tom.contents»«obj.generate»«ENDFOR»'''
+		'''Â«FOR obj:tom.contentsÂ»Â«obj.generateÂ»Â«ENDFORÂ»'''
 	
 }

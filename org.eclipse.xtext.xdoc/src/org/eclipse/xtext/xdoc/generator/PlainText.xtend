@@ -11,7 +11,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextPart
 class PlainText {
 
 	def dispatch CharSequence genPlainText(TextOrMarkup tom) {
-		tom.contents.fold('''''', [e1, e2 | '''«e1»«e2.genPlainText»'''])
+		tom.contents.fold('''''', [e1, e2 | '''Â«e1Â»Â«e2.genPlainTextÂ»'''])
 	}
 
 	def dispatch CharSequence genPlainText(TextPart tp){
@@ -19,38 +19,38 @@ class PlainText {
 	}
 
 	def dispatch CharSequence genPlainText(Emphasize em){
-		em.contents.fold('''''', [e1, e2 | '''«e1»«e2.genPlainText»'''])
+		em.contents.fold('''''', [e1, e2 | '''Â«e1Â»Â«e2.genPlainTextÂ»'''])
 	}
 
 	def dispatch CharSequence genPlainText(Link l) {
-		val text = '''«l.text»'''
+		val text = '''Â«l.textÂ»'''
 		if(text.toString != text)
 			text
 		else 
-			'''"«l.url»"'''
+			'''"Â«l.urlÂ»"'''
 	}
 
 	def dispatch CharSequence genPlainText(Ref ref) {
 		'''
-			«IF !ref.contents.empty »
-				«FOR e :ref.contents»
-					«e.genPlainText»
-				«ENDFOR»
-			«ELSE»
-				«ref.ref.name»
-			«ENDIF»
+			Â«IF !ref.contents.empty Â»
+				Â«FOR e :ref.contentsÂ»
+					Â«e.genPlainTextÂ»
+				Â«ENDFORÂ»
+			Â«ELSEÂ»
+				Â«ref.ref.nameÂ»
+			Â«ENDIFÂ»
 		'''
 	}
 
 	def dispatch CharSequence genPlainText(CodeRef cRef) {
-		'''«cRef.element.qualifiedName»'''
+		'''Â«cRef.element.qualifiedNameÂ»'''
 	}
 
 	def dispatch CharSequence genPlainText(CodeBlock cb) {
 		'''
-		«FOR c: cb.contents»
-			«c.genPlainText»
-		«ENDFOR»
+		Â«FOR c: cb.contentsÂ»
+			Â«c.genPlainTextÂ»
+		Â«ENDFORÂ»
 		'''
 	}
 
